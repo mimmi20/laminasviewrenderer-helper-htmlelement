@@ -15,7 +15,7 @@
     "php": "^7.4.3 || ^8.0.0",
     "ext-mbstring": "*",
     "laminas/laminas-json": "^3.3.0",
-    "laminas/laminas-view": "^2.13.0"
+    "laminas/laminas-view": "^2.14.1"
   },
   "conflict": {
     "container-interop/container-interop": "<1.2.0"
