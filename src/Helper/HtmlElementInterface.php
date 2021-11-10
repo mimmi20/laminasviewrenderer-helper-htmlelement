@@ -17,7 +17,7 @@ interface HtmlElementInterface
     /**
      * Returns an HTML string
      *
-     * @param array<string, array<string>|bool|float|int|iterable|string|null> $attribs
+     * @phpstan-param array<string, array<string>|bool|float|int|iterable|string|null> $attribs
      *
      * @return string HTML string
      */

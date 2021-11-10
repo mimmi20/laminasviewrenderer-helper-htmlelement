@@ -18,6 +18,8 @@ use Laminas\View\Helper\EscapeHtmlAttr;
 use Laminas\View\HelperPluginManager as ViewHelperPluginManager;
 use Psr\Container\ContainerExceptionInterface;
 
+use function assert;
+
 final class HtmlElementFactory
 {
     /**
@@ -27,9 +29,14 @@ final class HtmlElementFactory
     {
         $plugin = $container->get(ViewHelperPluginManager::class);
 
-        return new HtmlElement(
-            $plugin->get(EscapeHtml::class),
-            $plugin->get(EscapeHtmlAttr::class)
-        );
+        assert($plugin instanceof ViewHelperPluginManager);
+
+        $html = $plugin->get(EscapeHtml::class);
+        $attr = $plugin->get(EscapeHtmlAttr::class);
+
+        assert($html instanceof EscapeHtml);
+        assert($attr instanceof EscapeHtmlAttr);
+
+        return new HtmlElement($html, $attr);
     }
 }

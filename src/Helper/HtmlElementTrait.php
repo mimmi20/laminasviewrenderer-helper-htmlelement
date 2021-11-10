@@ -44,7 +44,7 @@ trait HtmlElementTrait
     /**
      * Generate an opening tag
      *
-     * @param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs
+     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs
      */
     private function open(string $element, array $attribs): string
     {
@@ -62,7 +62,7 @@ trait HtmlElementTrait
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * @param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs an array where each key-value pair is converted
+     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs an array where each key-value pair is converted
      *                                                                                                      to an attribute name and value
      */
     private function htmlAttribs(array $attribs): string
@@ -80,12 +80,12 @@ trait HtmlElementTrait
                 continue;
             }
 
-            assert(is_string($key));
-
             $key = ($this->escapeHtml)($key);
 
+            assert(is_string($key));
+
             if (true === $val) {
-                $xhtml .= sprintf(' %s', $key);
+                $xhtml .= ' ' . $key;
 
                 continue;
             }
@@ -111,6 +111,8 @@ trait HtmlElementTrait
 
                 $val = ($this->escapeHtmlAttr)($val);
             }
+
+            assert(is_string($val));
 
             if (false !== mb_strpos($val, '"')) {
                 $xhtml .= sprintf(' %s=\'%s\'', $key, $val);
