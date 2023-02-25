@@ -19,7 +19,7 @@
     "php": "^7.4.3 || ^8.0.0",
     "ext-mbstring": "*",
     "laminas/laminas-json": "^3.3.0",
-    "laminas/laminas-view": "^2.14.2"
+    "laminas/laminas-view": "^2.23.0"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.18.0",
