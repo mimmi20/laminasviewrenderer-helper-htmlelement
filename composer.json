@@ -22,7 +22,7 @@
     "laminas/laminas-view": "^2.14.2"
   },
   "require-dev": {
-    "ergebnis/composer-normalize": "^2.18.0",
+    "ergebnis/composer-normalize": "^2.28.3",
     "laminas/laminas-config": "^3.7.0",
     "laminas/laminas-dependency-plugin": "^2.2.0",
     "laminas/laminas-servicemanager": "^3.10.0",
