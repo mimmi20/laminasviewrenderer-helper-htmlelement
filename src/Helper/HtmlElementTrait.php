@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminasviewrenderer-helper-htmlelement package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -31,20 +31,19 @@ use function sprintf;
 
 trait HtmlElementTrait
 {
-    private EscapeHtml $escapeHtml;
-
-    private EscapeHtmlAttr $escapeHtmlAttr;
-
-    public function __construct(EscapeHtml $escapeHtml, EscapeHtmlAttr $escapeHtmlAttr)
-    {
-        $this->escapeHtml     = $escapeHtml;
-        $this->escapeHtmlAttr = $escapeHtmlAttr;
+    /** @throws void */
+    public function __construct(
+        private readonly EscapeHtml $escapeHtml,
+        private readonly EscapeHtmlAttr $escapeHtmlAttr,
+    ) {
     }
 
     /**
      * Generate an opening tag
      *
-     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs
+     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
+     *
+     * @throws void
      */
     private function open(string $element, array $attribs): string
     {
@@ -53,6 +52,8 @@ trait HtmlElementTrait
 
     /**
      * Return a closing tag
+     *
+     * @throws void
      */
     private function close(string $element): string
     {
@@ -62,15 +63,17 @@ trait HtmlElementTrait
     /**
      * Converts an associative array to a string of tag attributes.
      *
-     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs an array where each key-value pair is converted
+     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs an array where each key-value pair is converted
      *                                                                                                      to an attribute name and value
+     *
+     * @throws void
      */
     private function htmlAttribs(array $attribs): string
     {
         // filter out empty string values
         $attribs = array_filter(
             $attribs,
-            static fn ($value): bool => null !== $value && (!is_string($value) || mb_strlen($value))
+            static fn ($value): bool => null !== $value && (!is_string($value) || mb_strlen($value)),
         );
 
         $xhtml = '';

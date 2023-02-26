@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminasviewrenderer-helper-htmlelement package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,14 +18,10 @@ use Laminas\View\Helper\EscapeHtmlAttr;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 final class HtmlElementTest extends TestCase
 {
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testOpen(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2">';
@@ -42,21 +38,15 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(6))
             ->method('__invoke')
-            ->withConsecutive(
-                ['id'],
-                ['class'],
-                ['href'],
-                ['target'],
-                ['onClick'],
-                ['data-test']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'id',
-                'classEscaped',
-                'hrefEscaped',
-                'targetEscaped',
-                'onClick',
-                'data-test'
+            ->willReturnMap(
+                [
+                    ['id', 0, 'id'],
+                    ['class', 0, 'classEscaped'],
+                    ['href', 0, 'hrefEscaped'],
+                    ['target', 0, 'targetEscaped'],
+                    ['onClick', 0, 'onClick'],
+                    ['data-test', 0, 'data-test'],
+                ],
             );
 
         $escapeHtmlAttr = $this->getMockBuilder(EscapeHtmlAttr::class)
@@ -64,19 +54,14 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtmlAttr->expects(self::exactly(5))
             ->method('__invoke')
-            ->withConsecutive(
-                [$id],
-                [$class],
-                [$href],
-                [$target],
-                ['test-class1 test-class2']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'testIdEscaped',
-                'testClassEscaped',
-                '#Escaped',
-                '_blankEscaped',
-                'test-class1 test-class2'
+            ->willReturnMap(
+                [
+                    [$id, 0, 'testIdEscaped'],
+                    [$class, 0, 'testClassEscaped'],
+                    [$href, 0, '#Escaped'],
+                    [$target, 0, '_blankEscaped'],
+                    ['test-class1 test-class2', 0, 'test-class1 test-class2'],
+                ],
             );
 
         $element = 'a';
@@ -88,14 +73,11 @@ final class HtmlElementTest extends TestCase
             $htmlElement->openTag(
                 $element,
                 ['id' => $id, 'title' => '', 'class' => $class, 'href' => $href, 'target' => $target, 'onClick' => $onclick, 'data-test' => $testData],
-            )
+            ),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testToHtmlIgnoringNullAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2">';
@@ -112,21 +94,15 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(6))
             ->method('__invoke')
-            ->withConsecutive(
-                ['id'],
-                ['class'],
-                ['href'],
-                ['target'],
-                ['onClick'],
-                ['data-test']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'id',
-                'classEscaped',
-                'hrefEscaped',
-                'targetEscaped',
-                'onClick',
-                'data-test'
+            ->willReturnMap(
+                [
+                    ['id', 0, 'id'],
+                    ['class', 0, 'classEscaped'],
+                    ['href', 0, 'hrefEscaped'],
+                    ['target', 0, 'targetEscaped'],
+                    ['onClick', 0, 'onClick'],
+                    ['data-test', 0, 'data-test'],
+                ],
             );
 
         $escapeHtmlAttr = $this->getMockBuilder(EscapeHtmlAttr::class)
@@ -134,19 +110,14 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtmlAttr->expects(self::exactly(5))
             ->method('__invoke')
-            ->withConsecutive(
-                [$id],
-                [$class],
-                [$href],
-                [$target],
-                ['test-class1 test-class2']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'testIdEscaped',
-                'testClassEscaped',
-                '#Escaped',
-                '_blankEscaped',
-                'test-class1 test-class2'
+            ->willReturnMap(
+                [
+                    [$id, 0, 'testIdEscaped'],
+                    [$class, 0, 'testClassEscaped'],
+                    [$href, 0, '#Escaped'],
+                    [$target, 0, '_blankEscaped'],
+                    ['test-class1 test-class2', 0, 'test-class1 test-class2'],
+                ],
             );
 
         $element = 'a';
@@ -158,14 +129,11 @@ final class HtmlElementTest extends TestCase
             $htmlElement->openTag(
                 $element,
                 ['id' => $id, 'title' => '', 'class' => $class, 'href' => $href, 'target' => $target, 'onClick' => $onclick, 'data-test' => $testData, 'open' => null],
-            )
+            ),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testOpenNotIgnoringTrueAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped>';
@@ -182,23 +150,16 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(7))
             ->method('__invoke')
-            ->withConsecutive(
-                ['id'],
-                ['class'],
-                ['href'],
-                ['target'],
-                ['onClick'],
-                ['data-test'],
-                ['open']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'id',
-                'classEscaped',
-                'hrefEscaped',
-                'targetEscaped',
-                'onClick',
-                'data-test',
-                'openEscaped'
+            ->willReturnMap(
+                [
+                    ['id', 0, 'id'],
+                    ['class', 0, 'classEscaped'],
+                    ['href', 0, 'hrefEscaped'],
+                    ['target', 0, 'targetEscaped'],
+                    ['onClick', 0, 'onClick'],
+                    ['data-test', 0, 'data-test'],
+                    ['open', 0, 'openEscaped'],
+                ],
             );
 
         $escapeHtmlAttr = $this->getMockBuilder(EscapeHtmlAttr::class)
@@ -206,19 +167,14 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtmlAttr->expects(self::exactly(5))
             ->method('__invoke')
-            ->withConsecutive(
-                [$id],
-                [$class],
-                [$href],
-                [$target],
-                ['test-class1 test-class2']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'testIdEscaped',
-                'testClassEscaped',
-                '#Escaped',
-                '_blankEscaped',
-                'test-class1 test-class2'
+            ->willReturnMap(
+                [
+                    [$id, 0, 'testIdEscaped'],
+                    [$class, 0, 'testClassEscaped'],
+                    [$href, 0, '#Escaped'],
+                    [$target, 0, '_blankEscaped'],
+                    ['test-class1 test-class2', 0, 'test-class1 test-class2'],
+                ],
             );
 
         $element = 'a';
@@ -230,14 +186,11 @@ final class HtmlElementTest extends TestCase
             $htmlElement->openTag(
                 $element,
                 ['id' => $id, 'title' => '', 'class' => $class, 'href' => $href, 'target' => $target, 'onClick' => $onclick, 'data-test' => $testData, 'open' => true],
-            )
+            ),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testClose(): void
     {
         $expected = '</a>';
@@ -260,14 +213,11 @@ final class HtmlElementTest extends TestCase
 
         self::assertSame(
             $expected,
-            $htmlElement->closeTag($element)
+            $htmlElement->closeTag($element),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testInvoke(): void
     {
         $escapeHtml = $this->getMockBuilder(EscapeHtml::class)
@@ -286,14 +236,11 @@ final class HtmlElementTest extends TestCase
 
         self::assertSame(
             $htmlElement,
-            ($htmlElement)()
+            ($htmlElement)(),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testOpenWithIntAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped valueEscaped="0">';
@@ -311,25 +258,17 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(8))
             ->method('__invoke')
-            ->withConsecutive(
-                ['id'],
-                ['class'],
-                ['href'],
-                ['target'],
-                ['onClick'],
-                ['data-test'],
-                ['open'],
-                ['value']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'id',
-                'classEscaped',
-                'hrefEscaped',
-                'targetEscaped',
-                'onClick',
-                'data-test',
-                'openEscaped',
-                'valueEscaped'
+            ->willReturnMap(
+                [
+                    ['id', 0, 'id'],
+                    ['class', 0, 'classEscaped'],
+                    ['href', 0, 'hrefEscaped'],
+                    ['target', 0, 'targetEscaped'],
+                    ['onClick', 0, 'onClick'],
+                    ['data-test', 0, 'data-test'],
+                    ['open', 0, 'openEscaped'],
+                    ['value', 0, 'valueEscaped'],
+                ],
             );
 
         $escapeHtmlAttr = $this->getMockBuilder(EscapeHtmlAttr::class)
@@ -337,21 +276,15 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtmlAttr->expects(self::exactly(6))
             ->method('__invoke')
-            ->withConsecutive(
-                [$id],
-                [$class],
-                [$href],
-                [$target],
-                ['test-class1 test-class2'],
-                [(string) $value]
-            )
-            ->willReturnOnConsecutiveCalls(
-                'testIdEscaped',
-                'testClassEscaped',
-                '#Escaped',
-                '_blankEscaped',
-                'test-class1 test-class2',
-                (string) $value
+            ->willReturnMap(
+                [
+                    [$id, 0, 'testIdEscaped'],
+                    [$class, 0, 'testClassEscaped'],
+                    [$href, 0, '#Escaped'],
+                    [$target, 0, '_blankEscaped'],
+                    ['test-class1 test-class2', 0, 'test-class1 test-class2'],
+                    [(string) $value, 0, (string) $value],
+                ],
             );
 
         $element = 'a';
@@ -363,14 +296,11 @@ final class HtmlElementTest extends TestCase
             $htmlElement->openTag(
                 $element,
                 ['id' => $id, 'title' => '', 'class' => $class, 'href' => $href, 'target' => $target, 'onClick' => $onclick, 'data-test' => $testData, 'open' => true, 'value' => $value, 'xxx'],
-            )
+            ),
         );
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testOpenWithConfigAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped valueEscaped="0">';
@@ -388,25 +318,17 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtml->expects(self::exactly(8))
             ->method('__invoke')
-            ->withConsecutive(
-                ['id'],
-                ['class'],
-                ['href'],
-                ['target'],
-                ['onClick'],
-                ['data-test'],
-                ['open'],
-                ['value']
-            )
-            ->willReturnOnConsecutiveCalls(
-                'id',
-                'classEscaped',
-                'hrefEscaped',
-                'targetEscaped',
-                'onClick',
-                'data-test',
-                'openEscaped',
-                'valueEscaped'
+            ->willReturnMap(
+                [
+                    ['id', 0, 'id'],
+                    ['class', 0, 'classEscaped'],
+                    ['href', 0, 'hrefEscaped'],
+                    ['target', 0, 'targetEscaped'],
+                    ['onClick', 0, 'onClick'],
+                    ['data-test', 0, 'data-test'],
+                    ['open', 0, 'openEscaped'],
+                    ['value', 0, 'valueEscaped'],
+                ],
             );
 
         $escapeHtmlAttr = $this->getMockBuilder(EscapeHtmlAttr::class)
@@ -414,21 +336,15 @@ final class HtmlElementTest extends TestCase
             ->getMock();
         $escapeHtmlAttr->expects(self::exactly(6))
             ->method('__invoke')
-            ->withConsecutive(
-                [$id],
-                [$class],
-                [$href],
-                [$target],
-                ['test-class1 test-class2'],
-                [(string) $value]
-            )
-            ->willReturnOnConsecutiveCalls(
-                'testIdEscaped',
-                'testClassEscaped',
-                '#Escaped',
-                '_blankEscaped',
-                'test-class1 test-class2',
-                (string) $value
+            ->willReturnMap(
+                [
+                    [$id, 0, 'testIdEscaped'],
+                    [$class, 0, 'testClassEscaped'],
+                    [$href, 0, '#Escaped'],
+                    [$target, 0, '_blankEscaped'],
+                    ['test-class1 test-class2', 0, 'test-class1 test-class2'],
+                    [(string) $value, 0, (string) $value],
+                ],
             );
 
         $element = 'a';
@@ -440,7 +356,7 @@ final class HtmlElementTest extends TestCase
             $htmlElement->openTag(
                 $element,
                 ['id' => $id, 'title' => '', 'class' => $class, 'href' => $href, 'target' => $target, 'onClick' => $onclick, 'data-test' => $testData, 'open' => true, 'value' => $value, 'xxx'],
-            )
+            ),
         );
     }
 }
