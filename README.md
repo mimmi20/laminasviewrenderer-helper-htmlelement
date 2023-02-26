@@ -14,8 +14,8 @@
 
 Run
 
-```
-$ composer require mimmi20/laminasviewrenderer-helper-htmlelement
+```shell
+composer require mimmi20/laminasviewrenderer-helper-htmlelement
 ```
 
 ## License

@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminasviewrenderer-helper-htmlelement package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,21 +17,18 @@ use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementInterface;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 final class ConfigProviderTest extends TestCase
 {
     private ConfigProvider $provider;
 
+    /** @throws void */
     protected function setUp(): void
     {
         $this->provider = new ConfigProvider();
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testReturnedArrayContainsDependencies(): void
     {
         $config = ($this->provider)();
@@ -74,10 +71,7 @@ final class ConfigProviderTest extends TestCase
         self::assertArrayHasKey('htmlElement', $aliases);
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testReturnedArrayContainsDependencies2(): void
     {
         $dependencies = $this->provider->getDependencyConfig();
@@ -98,10 +92,7 @@ final class ConfigProviderTest extends TestCase
         self::assertArrayHasKey(HtmlElementInterface::class, $aliases);
     }
 
-    /**
-     * @throws Exception
-     * @throws InvalidArgumentException
-     */
+    /** @throws Exception */
     public function testReturnedArrayContainsViewhelpers(): void
     {
         $viewHelpers = $this->provider->getViewHelperConfig();

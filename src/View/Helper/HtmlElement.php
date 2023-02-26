@@ -2,7 +2,7 @@
 /**
  * This file is part of the mimmi20/laminasviewrenderer-helper-htmlelement package.
  *
- * Copyright (c) 2021, Thomas Mueller <mimmi20@live.de>
+ * Copyright (c) 2021-2023, Thomas Mueller <mimmi20@live.de>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,6 +20,7 @@ final class HtmlElement extends AbstractHelper
 {
     use HtmlElementTrait;
 
+    /** @throws void */
     public function __invoke(): self
     {
         return $this;
@@ -28,7 +29,9 @@ final class HtmlElement extends AbstractHelper
     /**
      * Generate an opening tag
      *
-     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable|stdClass|string|null)> $attribs
+     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
+     *
+     * @throws void
      */
     public function openTag(string $element, array $attribs): string
     {
@@ -37,6 +40,8 @@ final class HtmlElement extends AbstractHelper
 
     /**
      * Return a closing tag
+     *
+     * @throws void
      */
     public function closeTag(string $element): string
     {
