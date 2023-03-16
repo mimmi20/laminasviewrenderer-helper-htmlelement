@@ -21,7 +21,7 @@ use Traversable;
 use function array_filter;
 use function assert;
 use function implode;
-use function is_array;
+use function is_iterable;
 use function is_scalar;
 use function is_string;
 use function iterator_to_array;
@@ -100,7 +100,7 @@ trait HtmlElementTrait
                     $val = Json::encode($val);
                 }
             } else {
-                if (is_array($val) || $val instanceof Traversable) {
+                if (is_iterable($val)) {
                     if ($val instanceof Traversable) {
                         $val = iterator_to_array($val);
                     }
