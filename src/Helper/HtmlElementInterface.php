@@ -23,9 +23,5 @@ interface HtmlElementInterface
      *
      * @throws void
      */
-    public function toHtml(
-        string $element,
-        array $attribs,
-        string $content,
-    ): string;
+    public function toHtml(string $element, array $attribs, string $content): string;
 }

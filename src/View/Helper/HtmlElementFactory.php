@@ -31,11 +31,8 @@ final class HtmlElementFactory implements FactoryInterface
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
-    public function __invoke(
-        ContainerInterface $container,
-        $requestedName,
-        array | null $options = null,
-    ): HtmlElement {
+    public function __invoke(ContainerInterface $container, $requestedName, array | null $options = null): HtmlElement
+    {
         $plugin = $container->get(ViewHelperPluginManager::class);
 
         assert($plugin instanceof ViewHelperPluginManager);

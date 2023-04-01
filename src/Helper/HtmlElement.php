@@ -27,11 +27,8 @@ final class HtmlElement implements HtmlElementInterface
      *
      * @throws void
      */
-    public function toHtml(
-        string $element,
-        array $attribs,
-        string $content,
-    ): string {
+    public function toHtml(string $element, array $attribs, string $content): string
+    {
         return $this->open($element, $attribs) . $content . $this->close($element);
     }
 }
