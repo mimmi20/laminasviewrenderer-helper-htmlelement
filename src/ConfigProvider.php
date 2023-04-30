@@ -41,11 +41,11 @@ final class ConfigProvider
     public function getDependencyConfig(): array
     {
         return [
-            'factories' => [
-                Helper\HtmlElement::class => Helper\HtmlElementFactory::class,
-            ],
             'aliases' => [
                 Helper\HtmlElementInterface::class => Helper\HtmlElement::class,
+            ],
+            'factories' => [
+                Helper\HtmlElement::class => Helper\HtmlElementFactory::class,
             ],
         ];
     }
@@ -59,11 +59,11 @@ final class ConfigProvider
     public function getViewHelperConfig(): array
     {
         return [
-            'factories' => [
-                View\Helper\HtmlElement::class => View\Helper\HtmlElementFactory::class,
-            ],
             'aliases' => [
                 'htmlElement' => View\Helper\HtmlElement::class,
+            ],
+            'factories' => [
+                View\Helper\HtmlElement::class => View\Helper\HtmlElementFactory::class,
             ],
         ];
     }

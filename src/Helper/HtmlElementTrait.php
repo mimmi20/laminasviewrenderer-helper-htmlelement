@@ -73,7 +73,7 @@ trait HtmlElementTrait
         // filter out empty string values
         $attribs = array_filter(
             $attribs,
-            static fn ($value): bool => null !== $value && (!is_string($value) || mb_strlen($value)),
+            static fn ($value): bool => $value !== null && (!is_string($value) || mb_strlen($value)),
         );
 
         $xhtml = '';
@@ -87,13 +87,13 @@ trait HtmlElementTrait
 
             assert(is_string($key));
 
-            if (true === $val) {
+            if ($val === true) {
                 $xhtml .= ' ' . $key;
 
                 continue;
             }
 
-            if (0 === mb_strpos($key, 'on') || ('constraints' === $key) || $val instanceof stdClass) {
+            if (mb_strpos($key, 'on') === 0 || ($key === 'constraints') || $val instanceof stdClass) {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
@@ -117,7 +117,7 @@ trait HtmlElementTrait
 
             assert(is_string($val));
 
-            if (false !== mb_strpos($val, '"')) {
+            if (mb_strpos($val, '"') !== false) {
                 $xhtml .= sprintf(' %s=\'%s\'', $key, $val);
             } else {
                 $xhtml .= sprintf(' %s="%s"', $key, $val);
