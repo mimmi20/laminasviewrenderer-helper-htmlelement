@@ -234,10 +234,7 @@ final class HtmlElementTest extends TestCase
 
         $htmlElement = new HtmlElement($escapeHtml, $escapeHtmlAttr);
 
-        self::assertSame(
-            $htmlElement,
-            ($htmlElement)(),
-        );
+        self::assertSame($htmlElement, ($htmlElement)());
     }
 
     /** @throws Exception */

@@ -45,7 +45,10 @@ final class ConfigProviderTest extends TestCase
         $factories = $dependencies['factories'];
         self::assertIsArray($factories);
         self::assertCount(1, $factories);
-        self::assertArrayHasKey(\Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElement::class, $factories);
+        self::assertArrayHasKey(
+            \Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElement::class,
+            $factories,
+        );
 
         self::assertArrayHasKey('aliases', $dependencies);
 
@@ -82,7 +85,10 @@ final class ConfigProviderTest extends TestCase
         $factories = $dependencies['factories'];
         self::assertIsArray($factories);
         self::assertCount(1, $factories);
-        self::assertArrayHasKey(\Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElement::class, $factories);
+        self::assertArrayHasKey(
+            \Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElement::class,
+            $factories,
+        );
 
         self::assertArrayHasKey('aliases', $dependencies);
 
