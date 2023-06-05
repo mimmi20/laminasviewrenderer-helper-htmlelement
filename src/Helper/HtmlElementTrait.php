@@ -28,6 +28,7 @@ use function iterator_to_array;
 use function mb_strlen;
 use function mb_strpos;
 use function sprintf;
+use function str_starts_with;
 
 trait HtmlElementTrait
 {
