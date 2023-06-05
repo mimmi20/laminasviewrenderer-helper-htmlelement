@@ -36,6 +36,7 @@ trait HtmlElementTrait
         private readonly EscapeHtml $escapeHtml,
         private readonly EscapeHtmlAttr $escapeHtmlAttr,
     ) {
+        // nothing to do
     }
 
     /**
@@ -93,7 +94,7 @@ trait HtmlElementTrait
                 continue;
             }
 
-            if (mb_strpos($key, 'on') === 0 || ($key === 'constraints') || $val instanceof stdClass) {
+            if (str_starts_with($key, 'on') || ($key === 'constraints') || $val instanceof stdClass) {
                 // Don't escape event attributes; _do_ substitute double quotes with singles
                 if (!is_scalar($val)) {
                     // non-scalar data should be cast to JSON first
