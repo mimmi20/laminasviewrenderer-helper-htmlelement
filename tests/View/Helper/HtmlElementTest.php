@@ -13,6 +13,7 @@ declare(strict_types = 1);
 namespace Mimmi20Test\LaminasView\Helper\HtmlElement\View\Helper;
 
 use Laminas\Config\Config;
+use Laminas\View\Exception\InvalidArgumentException;
 use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\Helper\EscapeHtmlAttr;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
@@ -21,7 +22,10 @@ use PHPUnit\Framework\TestCase;
 
 final class HtmlElementTest extends TestCase
 {
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testOpen(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2">';
@@ -77,7 +81,10 @@ final class HtmlElementTest extends TestCase
         );
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testToHtmlIgnoringNullAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2">';
@@ -133,7 +140,10 @@ final class HtmlElementTest extends TestCase
         );
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testOpenNotIgnoringTrueAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped>';
@@ -237,7 +247,10 @@ final class HtmlElementTest extends TestCase
         self::assertSame($htmlElement, ($htmlElement)());
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testOpenWithIntAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped valueEscaped="0">';
@@ -297,7 +310,10 @@ final class HtmlElementTest extends TestCase
         );
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws InvalidArgumentException
+     */
     public function testOpenWithConfigAttributes(): void
     {
         $expected = '<a id="testIdEscaped" classEscaped="testClassEscaped" hrefEscaped="#Escaped" targetEscaped="_blankEscaped" onClick=\'{"a":"b"}\' data-test="test-class1 test-class2" openEscaped valueEscaped="0">';

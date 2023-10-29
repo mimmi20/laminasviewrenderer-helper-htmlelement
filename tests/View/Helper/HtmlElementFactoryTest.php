@@ -20,6 +20,7 @@ use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElementFactory;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 
 use function assert;
 
@@ -33,7 +34,10 @@ final class HtmlElementFactoryTest extends TestCase
         $this->factory = new HtmlElementFactory();
     }
 
-    /** @throws Exception */
+    /**
+     * @throws Exception
+     * @throws ContainerExceptionInterface
+     */
     public function testInvocation(): void
     {
         $escapeHtml     = $this->createMock(EscapeHtml::class);

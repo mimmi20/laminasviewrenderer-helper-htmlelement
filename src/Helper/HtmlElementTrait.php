@@ -13,6 +13,7 @@ declare(strict_types = 1);
 namespace Mimmi20\LaminasView\Helper\HtmlElement\Helper;
 
 use Laminas\Json\Json;
+use Laminas\View\Exception\InvalidArgumentException;
 use Laminas\View\Helper\EscapeHtml;
 use Laminas\View\Helper\EscapeHtmlAttr;
 use stdClass;
@@ -45,7 +46,7 @@ trait HtmlElementTrait
      *
      * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
      *
-     * @throws void
+     * @throws InvalidArgumentException
      */
     private function open(string $element, array $attribs): string
     {
@@ -68,7 +69,7 @@ trait HtmlElementTrait
      * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs an array where each key-value pair is converted
      *                                                                                                      to an attribute name and value
      *
-     * @throws void
+     * @throws InvalidArgumentException
      */
     private function htmlAttribs(array $attribs): string
     {
