@@ -12,6 +12,7 @@ declare(strict_types = 1);
 
 namespace Mimmi20\LaminasView\Helper\HtmlElement\View\Helper;
 
+use Laminas\View\Exception\InvalidArgumentException;
 use Laminas\View\Helper\AbstractHelper;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementTrait;
 use stdClass;
@@ -31,7 +32,7 @@ final class HtmlElement extends AbstractHelper
      *
      * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
      *
-     * @throws void
+     * @throws InvalidArgumentException
      */
     public function openTag(string $element, array $attribs): string
     {

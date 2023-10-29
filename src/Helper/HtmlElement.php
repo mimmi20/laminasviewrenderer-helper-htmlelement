@@ -12,6 +12,7 @@ declare(strict_types = 1);
 
 namespace Mimmi20\LaminasView\Helper\HtmlElement\Helper;
 
+use Laminas\View\Exception\InvalidArgumentException;
 use stdClass;
 
 final class HtmlElement implements HtmlElementInterface
@@ -25,7 +26,7 @@ final class HtmlElement implements HtmlElementInterface
      *
      * @return string HTML string
      *
-     * @throws void
+     * @throws InvalidArgumentException
      */
     public function toHtml(string $element, array $attribs, string $content): string
     {
