@@ -69,4 +69,4 @@ jobs:
       min-msi: 98
       min-covered-msi: 98
       upload-codecov: true
-      upload-codeclimate: false
+      upload-codeclimate: true
