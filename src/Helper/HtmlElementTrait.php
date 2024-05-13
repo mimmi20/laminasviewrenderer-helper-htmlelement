@@ -76,7 +76,9 @@ trait HtmlElementTrait
         // filter out empty string values
         $attribs = array_filter(
             $attribs,
-            static fn ($value): bool => $value !== null && (!is_string($value) || mb_strlen($value)),
+            static fn (mixed $value): bool => $value !== null && (!is_string($value) || mb_strlen(
+                $value,
+            )),
         );
 
         $xhtml = '';
