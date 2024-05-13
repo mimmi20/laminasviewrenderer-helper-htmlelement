@@ -33,6 +33,8 @@ final class HtmlElement extends AbstractHelper
      * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
      *
      * @throws InvalidArgumentException
+     *
+     * @api
      */
     public function openTag(string $element, array $attribs): string
     {
@@ -43,6 +45,8 @@ final class HtmlElement extends AbstractHelper
      * Return a closing tag
      *
      * @throws void
+     *
+     * @api
      */
     public function closeTag(string $element): string
     {
