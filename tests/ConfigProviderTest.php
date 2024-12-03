@@ -16,6 +16,7 @@ namespace Mimmi20Test\LaminasView\Helper\HtmlElement;
 use Mimmi20\LaminasView\Helper\HtmlElement\ConfigProvider;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementInterface;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
@@ -24,6 +25,7 @@ final class ConfigProviderTest extends TestCase
     private ConfigProvider $provider;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->provider = new ConfigProvider();

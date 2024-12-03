@@ -18,11 +18,11 @@ interface HtmlElementInterface
     /**
      * Returns an HTML string
      *
-     * @phpstan-param array<string, array<int, string>|bool|float|int|iterable<int, string>|string|null> $attribs
+     * @phpstan-param iterable<string, array<mixed>|bool|float|int|string|null> $attribs
      *
      * @return string HTML string
      *
      * @throws void
      */
-    public function toHtml(string $element, array $attribs, string $content): string;
+    public function toHtml(string $element, iterable $attribs, string $content): string;
 }

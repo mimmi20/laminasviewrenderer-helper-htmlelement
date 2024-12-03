@@ -1,7 +1,7 @@
 parameters:
   level: max
 
-  phpVersion: 80100 # PHP 8.1
+  phpVersion: 80300 # PHP 8.3
 
   parallel:
     maximumNumberOfProcesses: 1
@@ -101,9 +101,10 @@ parameters:
     function: 20
 
   type_coverage:
-    return: 100
-    param: 93.1
-    property: 100
+    return_type: 100
+    param_type: 91.3
+    property_type: 100
+    constant_type: 100
     # also, how many files has declare strict types
     declare: 100
 
@@ -121,6 +122,7 @@ parameters:
   ignoreErrors:
 #    - '~is not subtype of Throwable~'
     - '~will always evaluate to true~'
+    - '~has JsonException in PHPDoc @throws tag but it.s not thrown~'
 
 rules:
   # code complexity
