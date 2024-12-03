@@ -13,15 +13,15 @@ declare(strict_types = 1);
 
 namespace Mimmi20Test\LaminasView\Helper\HtmlElement\Helper;
 
-use Interop\Container\ContainerInterface;
-use Laminas\View\Helper\EscapeHtml;
-use Laminas\View\Helper\EscapeHtmlAttr;
+use Laminas\View\Helper\HtmlAttributes;
 use Laminas\View\HelperPluginManager;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElement;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementFactory;
+use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 
 use function assert;
 
@@ -30,6 +30,7 @@ final class HtmlElementFactoryTest extends TestCase
     private HtmlElementFactory $factory;
 
     /** @throws void */
+    #[Override]
     protected function setUp(): void
     {
         $this->factory = new HtmlElementFactory();
@@ -41,20 +42,15 @@ final class HtmlElementFactoryTest extends TestCase
      */
     public function testInvocation(): void
     {
-        $escapeHtml     = $this->createMock(EscapeHtml::class);
-        $escapeHtmlAttr = $this->createMock(EscapeHtmlAttr::class);
+        $htmlAttributes = $this->createMock(HtmlAttributes::class);
 
         $helperPluginManager = $this->getMockBuilder(HelperPluginManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $helperPluginManager->expects(self::exactly(2))
+        $helperPluginManager->expects(self::once())
             ->method('get')
-            ->willReturnMap(
-                [
-                    [EscapeHtml::class, null, $escapeHtml],
-                    [EscapeHtmlAttr::class, null, $escapeHtmlAttr],
-                ],
-            );
+            ->with(HtmlAttributes::class, null)
+            ->willReturn($htmlAttributes);
         $helperPluginManager->expects(self::never())
             ->method('has');
 

@@ -13,10 +13,9 @@ declare(strict_types = 1);
 
 namespace Mimmi20\LaminasView\Helper\HtmlElement\View\Helper;
 
-use Laminas\View\Exception\InvalidArgumentException;
+use JsonException;
 use Laminas\View\Helper\AbstractHelper;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementTrait;
-use stdClass;
 
 final class HtmlElement extends AbstractHelper
 {
@@ -31,13 +30,13 @@ final class HtmlElement extends AbstractHelper
     /**
      * Generate an opening tag
      *
-     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
+     * @phpstan-param iterable<string, array<mixed>|bool|float|int|string|null> $attribs
      *
-     * @throws InvalidArgumentException
+     * @throws JsonException
      *
      * @api
      */
-    public function openTag(string $element, array $attribs): string
+    public function openTag(string $element, iterable $attribs): string
     {
         return $this->open($element, $attribs);
     }

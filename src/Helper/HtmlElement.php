@@ -13,8 +13,8 @@ declare(strict_types = 1);
 
 namespace Mimmi20\LaminasView\Helper\HtmlElement\Helper;
 
-use Laminas\View\Exception\InvalidArgumentException;
-use stdClass;
+use JsonException;
+use Override;
 
 final class HtmlElement implements HtmlElementInterface
 {
@@ -23,13 +23,14 @@ final class HtmlElement implements HtmlElementInterface
     /**
      * Returns an HTML string
      *
-     * @phpstan-param array<int|string, (array<int, string>|bool|float|int|iterable<int, string>|stdClass|string|null)> $attribs
+     * @phpstan-param iterable<string, array<mixed>|bool|float|int|string|null> $attribs
      *
      * @return string HTML string
      *
-     * @throws InvalidArgumentException
+     * @throws JsonException
      */
-    public function toHtml(string $element, array $attribs, string $content): string
+    #[Override]
+    public function toHtml(string $element, iterable $attribs, string $content): string
     {
         return $this->open($element, $attribs) . $content . $this->close($element);
     }

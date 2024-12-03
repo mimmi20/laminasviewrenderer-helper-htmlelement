@@ -13,12 +13,12 @@ declare(strict_types = 1);
 
 namespace Mimmi20\LaminasView\Helper\HtmlElement\View\Helper;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Laminas\View\Helper\EscapeHtml;
-use Laminas\View\Helper\EscapeHtmlAttr;
+use Laminas\View\Helper\HtmlAttributes;
 use Laminas\View\HelperPluginManager as ViewHelperPluginManager;
+use Override;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 
 use function assert;
 
@@ -32,18 +32,17 @@ final class HtmlElementFactory implements FactoryInterface
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
+    #[Override]
     public function __invoke(ContainerInterface $container, $requestedName, array | null $options = null): HtmlElement
     {
         $plugin = $container->get(ViewHelperPluginManager::class);
 
         assert($plugin instanceof ViewHelperPluginManager);
 
-        $html = $plugin->get(EscapeHtml::class);
-        $attr = $plugin->get(EscapeHtmlAttr::class);
+        $htmlAttributes = $plugin->get(HtmlAttributes::class);
 
-        assert($html instanceof EscapeHtml);
-        assert($attr instanceof EscapeHtmlAttr);
+        assert($htmlAttributes instanceof HtmlAttributes);
 
-        return new HtmlElement($html, $attr);
+        return new HtmlElement($htmlAttributes);
     }
 }
