@@ -15,7 +15,9 @@ namespace Mimmi20\LaminasView\Helper\HtmlElement\Helper;
 
 use JsonException;
 use Laminas\View\Helper\HtmlAttributes;
+use Laminas\View\HtmlAttributesSet;
 
+use function assert;
 use function sprintf;
 
 trait HtmlElementTrait
@@ -35,7 +37,10 @@ trait HtmlElementTrait
      */
     private function open(string $element, iterable $attribs): string
     {
-        return sprintf('<%s%s>', $element, (string) ($this->htmlAttributes)($attribs));
+        $htmlAttributes = ($this->htmlAttributes)($attribs);
+        assert($htmlAttributes instanceof HtmlAttributesSet);
+
+        return sprintf('<%s%s>', $element, (string) $htmlAttributes);
     }
 
     /**
