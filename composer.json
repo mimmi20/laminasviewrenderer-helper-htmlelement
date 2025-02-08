@@ -17,6 +17,7 @@
   },
   "require": {
     "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+    "laminas/laminas-servicemanager": "^3.22.1",
     "laminas/laminas-view": "^2.36.0"
   },
   "require-dev": {
@@ -30,7 +31,6 @@
     "infection/infection": "^0.29.10",
     "laminas/laminas-escaper": "^2.15.0",
     "laminas/laminas-modulemanager": "^2.17.0",
-    "laminas/laminas-servicemanager": "^3.22.1",
     "mimmi20/coding-standard": "^6.0.10",
     "nikic/php-parser": "^5.4.0",
     "phpstan/extension-installer": "^1.4.3",
@@ -49,8 +49,7 @@
     "tomasvotruba/unused-public": "^2.0.0"
   },
   "suggest": {
-    "ext-intl": "required to use the Translator",
-    "laminas/laminas-servicemanager": "to use the helper factories"
+    "ext-intl": "required to use the Translator"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
