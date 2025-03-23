@@ -16,25 +16,15 @@ namespace Mimmi20Test\LaminasView\Helper\HtmlElement;
 use Mimmi20\LaminasView\Helper\HtmlElement\ConfigProvider;
 use Mimmi20\LaminasView\Helper\HtmlElement\Helper\HtmlElementInterface;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
-use Override;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigProviderTest extends TestCase
 {
-    private ConfigProvider $provider;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->provider = new ConfigProvider();
-    }
-
     /** @throws Exception */
     public function testReturnedArrayContainsDependencies(): void
     {
-        $config = ($this->provider)();
+        $config = (new ConfigProvider())();
         self::assertIsArray($config);
         self::assertCount(2, $config);
 
@@ -80,7 +70,7 @@ final class ConfigProviderTest extends TestCase
     /** @throws Exception */
     public function testReturnedArrayContainsDependencies2(): void
     {
-        $dependencies = $this->provider->getDependencyConfig();
+        $dependencies = (new ConfigProvider())->getDependencyConfig();
         self::assertIsArray($dependencies);
         self::assertCount(2, $dependencies);
         self::assertArrayHasKey('factories', $dependencies);
@@ -104,7 +94,7 @@ final class ConfigProviderTest extends TestCase
     /** @throws Exception */
     public function testReturnedArrayContainsViewhelpers(): void
     {
-        $viewHelpers = $this->provider->getViewHelperConfig();
+        $viewHelpers = (new ConfigProvider())->getViewHelperConfig();
         self::assertIsArray($viewHelpers);
         self::assertCount(2, $viewHelpers);
         self::assertArrayHasKey('factories', $viewHelpers);

@@ -17,7 +17,7 @@ use Laminas\View\Helper\HtmlAttributes;
 use Laminas\View\HelperPluginManager;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElement;
 use Mimmi20\LaminasView\Helper\HtmlElement\View\Helper\HtmlElementFactory;
-use Override;
+use PHPUnit\Event\NoPreviousThrowableException;
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
@@ -27,18 +27,11 @@ use function assert;
 
 final class HtmlElementFactoryTest extends TestCase
 {
-    private HtmlElementFactory $factory;
-
-    /** @throws void */
-    #[Override]
-    protected function setUp(): void
-    {
-        $this->factory = new HtmlElementFactory();
-    }
-
     /**
      * @throws Exception
      * @throws ContainerExceptionInterface
+     * @throws NoPreviousThrowableException
+     * @throws \PHPUnit\Framework\MockObject\Exception
      */
     public function testInvocation(): void
     {
@@ -63,7 +56,7 @@ final class HtmlElementFactoryTest extends TestCase
             ->willReturn($helperPluginManager);
 
         assert($container instanceof ContainerInterface);
-        $helper = ($this->factory)($container, '');
+        $helper = (new HtmlElementFactory())($container, '');
 
         self::assertInstanceOf(HtmlElement::class, $helper);
     }
