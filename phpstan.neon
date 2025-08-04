@@ -108,9 +108,9 @@ parameters:
     narrow_param: true
 
   ignoreErrors:
-#    - '~is not subtype of Throwable~'
     - '~will always evaluate to true~'
     - '~has JsonException in PHPDoc @throws tag but it.s not thrown~'
+    - '~extends deprecated class~'
 
 rules:
   # code complexity
