@@ -38,6 +38,8 @@ final class ConfigProvider
      * @phpstan-return array{factories: array<class-string, class-string>, aliases: array<class-string, class-string>}
      *
      * @throws void
+     *
+     * @api
      */
     public function getDependencyConfig(): array
     {
@@ -56,6 +58,8 @@ final class ConfigProvider
      * @phpstan-return array{factories: array<class-string, class-string>, aliases: array<string, class-string>}
      *
      * @throws void
+     *
+     * @api
      */
     public function getViewHelperConfig(): array
     {
